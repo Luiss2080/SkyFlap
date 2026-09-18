@@ -1,4 +1,4 @@
-# <<NOMBRE>>
+# SkyFlap
 
 Recreación de Flappy Bird en Python con [pygame](https://www.pygame.org/), construida paso a paso como ejercicio de aprendizaje. El repositorio conserva las etapas intermedias del desarrollo y una versión final jugable (`Final6.py`).
 
