@@ -1,17 +1,71 @@
-# SkyFlap
+<div align="center">
+  <img src="docs/assets/logo.svg" width="96" alt="Logo de SkyFlap" />
+  <h1>SkyFlap</h1>
+  <p><b>Flappy Bird en Python y pygame, construido paso a paso como ejercicio de aprendizaje.</b></p>
+  <img src="https://img.shields.io/badge/estado-jugable-2ea44f?style=for-the-badge" alt="Estado: jugable" />
+  <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+" />
+  <img src="https://img.shields.io/badge/pygame--ce-2.5%2B-6366f1?style=for-the-badge" alt="pygame-ce 2.5+" />
+  <img src="https://img.shields.io/badge/tests-15%20pasan-2ea44f?style=for-the-badge" alt="15 tests" />
+  <img src="https://github.com/Luiss2080/SkyFlap/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  <p>
+    <a href="#-inicio-rápido">Inicio rápido</a> ·
+    <a href="#-características">Características</a> ·
+    <a href="#-arquitectura">Arquitectura</a> ·
+    <a href="#-pruebas">Pruebas</a> ·
+    <a href="#-lo-que-todavía-no-existe">Limitaciones</a>
+  </p>
+</div>
 
-Recreación de Flappy Bird en Python con [pygame](https://www.pygame.org/), construida paso a paso como ejercicio de aprendizaje. El repositorio conserva las etapas intermedias del desarrollo y una versión final jugable (`Final6.py`).
+SkyFlap es una recreación de Flappy Bird para escritorio. El repositorio conserva las etapas intermedias del desarrollo (`Logica, imagen1.py` a `vidas5.py`) y una versión final jugable, `Final6.py`, que usa una lógica pura y probada en `flappy_logic.py`. Es un proyecto de aprendizaje: no es un juego pulido ni tiene reinicio, menús ni puntuación guardada.
 
-## Qué hace la versión final (`Final6.py`)
+## 🎬 Vista rápida
 
-- Un pájaro que salta con la barra espaciadora y cae por gravedad.
-- Un tubo a la vez que avanza de derecha a izquierda; el hueco tiene siempre 200 px y su altura es aleatoria.
-- Tres vidas: cada tubo golpeado, y cada contacto con techo o suelo, cuesta una vida. Con 0 vidas el juego termina y muestra el puntaje en la consola.
-- Puntaje: 1 punto por tubo superado.
-- Cronómetro, puntaje y corazones de vida en pantalla.
-- Sonidos de salto, colisión y paso de obstáculo, más música de fondo. Sin dispositivo de audio el juego corre en silencio.
+<div align="center">
+  <img src="docs/screenshots/juego.png" width="300" alt="Fotograma del juego: pájaro amarillo entre dos tubos sobre fondo violeta, con tiempo, puntos y tres corazones" />
+</div>
 
-## Etapas del desarrollo
+> Fotograma compuesto con los sprites reales del repositorio y las funciones de `flappy_logic.py` (posición de tubos y hueco), generado en modo headless; no es una grabación del bucle de juego.
+
+## ✨ Características
+
+| Característica | Detalle |
+|---|---|
+| Control | `Espacio` hace saltar al pájaro; cerrar la ventana sale |
+| Física | Gravedad y amortiguación independientes de los FPS (`dt` acotado a 50 ms) |
+| Tubos | Un tubo a la vez, de derecha a izquierda; hueco fijo de 200 px con altura aleatoria |
+| Vidas | 3 vidas; cada tubo golpeado y cada contacto con techo o suelo cuesta una |
+| Puntaje | 1 punto por tubo superado; cronómetro, puntos y corazones en pantalla |
+| Audio | Salto, colisión, paso de obstáculo y música; sin dispositivo de audio corre en silencio |
+
+## 🏗️ Arquitectura
+
+```mermaid
+flowchart TD
+    F["Final6.py<br/>bucle, dibujo, teclado, audio"] -->|usa| L["flappy_logic.py<br/>física, hueco, colisiones, puntaje"]
+    F --> I["Imagenes/<br/>sprites y sonidos"]
+    T["tests/"] -->|prueba| L
+    T -->|prueba| F
+    E["Etapas 1 a 5<br/>Logica, imagen1 · Colision2 · Sonidos3 · Cronometro4 · vidas5"] -.históricas.-> I
+```
+
+`flappy_logic.py` no depende de pygame, por eso se puede probar sin abrir ventana.
+
+## 🚀 Inicio rápido
+
+| Requisito | Versión |
+|---|---|
+| Python | 3.9 o superior |
+| pygame-ce | 2.5 o superior (`requirements.txt`) |
+
+```bash
+pip install -r requirements.txt
+python Final6.py
+```
+
+Ejecuta siempre desde la raíz del repositorio (las etapas 1 a 5 dependen del directorio de trabajo).
+
+<details>
+<summary>Etapas del desarrollo y estructura</summary>
 
 | Archivo | Contenido |
 |---|---|
@@ -22,40 +76,40 @@ Recreación de Flappy Bird en Python con [pygame](https://www.pygame.org/), cons
 | `vidas5.py` | Sistema de vidas |
 | `Final6.py` | Versión final, usa `flappy_logic.py` |
 
-Las etapas 1 a 5 son históricas: se dejan tal cual, dependen del directorio de trabajo (ejecutar desde la raíz del repositorio) y conservan los errores de la versión original.
+Las etapas 1 a 5 se dejan tal cual y conservan los errores de la versión original.
 
-`flappy_logic.py` contiene la lógica pura (física, generación del hueco, colisiones, puntaje) sin depender de pygame, para poder probarla.
-
-## Instalación y ejecución
-
-Requiere Python 3.9 o superior.
-
-```bash
-pip install -r requirements.txt
-python Final6.py
+```text
+SkyFlap/
+├── Final6.py · flappy_logic.py
+├── (etapas 1 a 5).py
+├── Imagenes/            # sprites y Sonidos/
+├── tests/               # test_logica.py, test_audio_y_rutas.py
+├── requirements.txt · requirements-dev.txt
+└── .github/workflows/ci.yml
 ```
 
-Controles: `Espacio` salta; cerrar la ventana sale.
+</details>
 
-## Pruebas
+## 🧪 Pruebas
 
 ```bash
 pip install -r requirements-dev.txt
 python -m pytest
 ```
 
-En un entorno sin pantalla ni audio: `SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy python -m pytest`. GitHub Actions ejecuta lo mismo en cada push y pull request.
+Son **15 tests** (comprobados: 15 pasan): cubren la lógica pura y la carga de recursos. En un entorno sin pantalla ni audio: `SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy python -m pytest`. GitHub Actions lo ejecuta en cada push a `main` y en cada pull request. El bucle gráfico no se prueba automáticamente.
 
-## Limitaciones conocidas
+## 🚧 Lo que todavía no existe
 
-- Las imágenes de `Imagenes/` incluyen fondos (`FondoAmarillo`, `FondoNormal`, `FondoRojo`) y pájaros (`PajaroAmarillo`, `PajaroAzul`, `PajaroGris`, `PajaroRosa`) alternativos y un `Restart.png`, pero **el código no los usa**: no hay selección de escenarios ni de pájaros, ni pantalla de reinicio. Al terminar, el juego se cierra.
-- No hay puntuación máxima persistente; el puntaje solo se imprime en la consola.
-- Solo hay un tubo en pantalla a la vez.
-- Los saltos se suman a la velocidad actual (comportamiento original), por lo que pulsar muy rápido acumula impulso.
-- Las colisiones usan rectángulos del tamaño del sprite (60x43 el pájaro, 50 px de ancho los tubos); no son pixel-perfect.
-- Las pruebas cubren la lógica pura y la carga de recursos; el bucle gráfico no se prueba automáticamente.
-- El archivo `FondoAmarillo.mp3` se usa como música en todas las etapas; `FondoNormal.mp3` y `FondoVioleta.mp3` no se usan.
+- Varios fondos (`FondoAmarillo`, `FondoNormal`, `FondoRojo`), pájaros alternativos y `Restart.png` están en `Imagenes/`, pero el código no los usa: no hay selección de escenario ni de pájaro, ni pantalla de reinicio. Al terminar, el juego se cierra.
+- Sin puntuación máxima persistente: el puntaje final solo se imprime en consola.
+- Solo un tubo en pantalla a la vez.
+- Los saltos se suman a la velocidad actual (comportamiento original): pulsar muy rápido acumula impulso.
+- Colisiones por rectángulos del tamaño del sprite, no pixel-perfect.
+- `FondoNormal.mp3` y `FondoVioleta.mp3` no se usan; siempre suena `FondoAmarillo.mp3`.
 
-## Licencia
+## 📄 Licencia
 
-Este repositorio no incluye un archivo de licencia. Sin licencia explícita, todos los derechos quedan reservados por su autor. Las imágenes y sonidos tampoco declaran su origen ni licencia.
+Sin licencia definida: todos los derechos reservados por defecto. Las imágenes y sonidos tampoco declaran origen ni licencia.
+
+<div align="center"><sub>Hecho por Luiss2080 · Python + pygame</sub></div>
