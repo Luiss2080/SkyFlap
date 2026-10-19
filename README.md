@@ -7,6 +7,9 @@
   <img src="https://img.shields.io/badge/pygame--ce-2.5%2B-6366f1?style=for-the-badge" alt="pygame-ce 2.5+" />
   <img src="https://img.shields.io/badge/tests-15%20pasan-2ea44f?style=for-the-badge" alt="15 tests" />
   <img src="https://github.com/Luiss2080/SkyFlap/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  <img src="https://img.shields.io/github/license/Luiss2080/SkyFlap?color=blue" alt="Licencia MIT" />
+  <img src="https://img.shields.io/github/last-commit/Luiss2080/SkyFlap" alt="Último commit" />
+  <img src="https://img.shields.io/badge/PRs-bienvenidos-brightgreen.svg" alt="PRs bienvenidos" />
   <p>
     <a href="#-inicio-rápido">Inicio rápido</a> ·
     <a href="#-características">Características</a> ·
@@ -108,8 +111,14 @@ Son **15 tests** (comprobados: 15 pasan): cubren la lógica pura y la carga de r
 - Colisiones por rectángulos del tamaño del sprite, no pixel-perfect.
 - `FondoNormal.mp3` y `FondoVioleta.mp3` no se usan; siempre suena `FondoAmarillo.mp3`.
 
+## 🤝 Contribuir
+
+¡Las contribuciones son bienvenidas! Leé la [guía de contribución](CONTRIBUTING.md) y el [código de conducta](CODE_OF_CONDUCT.md) antes de abrir un PR. Para bugs o ideas usá las [plantillas de issues](../../issues/new/choose); los problemas de seguridad se reportan según la [política de seguridad](SECURITY.md). ¿Dudas? Mirá [SUPPORT.md](SUPPORT.md). Los cambios por versión están en el [CHANGELOG](CHANGELOG.md).
+
 ## 📄 Licencia
 
-Sin licencia definida: todos los derechos reservados por defecto. Las imágenes y sonidos tampoco declaran origen ni licencia.
+Distribuido bajo la licencia MIT. Ver [LICENSE](LICENSE).
+
+La licencia cubre el código. Las imágenes y sonidos de `Imagenes/` no declaran origen ni licencia propia.
 
 <div align="center"><sub>Hecho por Luiss2080 · Python + pygame</sub></div>
